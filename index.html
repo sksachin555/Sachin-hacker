@@ -1,140 +1,63 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Multi Tool Hub</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
-
-        body {
-            background: #1E1E2F;
-            color: #EAEAEA;
-            text-align: center;
-        }
-
-        .header {
-            background: #2B2D42;
-            padding: 20px;
-            font-size: 24px;
-            font-weight: bold;
-            color: #FFD700;
-        }
-
-        .container {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            max-width: 900px;
-            margin: 40px auto;
-        }
-
-        .tool-card {
-            background: #3A3D5B;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            transition: 0.3s;
-            box-shadow: 0 4px 8px rgba(255, 215, 0, 0.2);
-        }
-
-        .tool-card:hover {
-            background: #FFD700;
-            color: #1E1E2F;
-        }
-
-        .tool-card h2 {
-            margin-bottom: 10px;
-        }
-
-        .btn {
-            display: inline-block;
-            margin-top: 10px;
-            padding: 10px 20px;
-            background: #FFD700;
-            color: #1E1E2F;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .btn:hover {
-            background: #E6C200;
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    <title>BG Remover | Free Background Removal</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="header">Multi Tool Hub</div>
+    <header>
+        <h1>Background Remover</h1>
+        <p>Remove image backgrounds with one click</p>
+    </header>
     
-    <div class="container">
-        <div class="tool-card">
-            <h2>Image Converter</h2>
-            <p>Convert images to different formats easily.</p>
-            <button class="btn" onclick="goToSection('image-converter')">Go to Tool</button>
+    <main>
+        <div class="container">
+            <div class="upload-section">
+                <input type="file" id="imageUpload" accept="image/*" hidden>
+                <div id="dropArea">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="17 8 12 3 7 8"></polyline>
+                        <line x1="12" y1="3" x2="12" y2="15"></line>
+                    </svg>
+                    <h2>Upload an Image</h2>
+                    <p>Drag & drop or <span id="browseBtn">browse files</span></p>
+                    <small>Supports JPG, PNG, WebP (Max 5MB)</small>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar"></div>
+                </div>
+            </div>
+            
+            <div class="results-section hidden">
+                <div class="result-container">
+                    <div class="result-panel">
+                        <h3>Original Image</h3>
+                        <canvas id="originalCanvas"></canvas>
+                    </div>
+                    <div class="result-panel">
+                        <h3>Background Removed</h3>
+                        <canvas id="resultCanvas"></canvas>
+                    </div>
+                </div>
+                
+                <div class="actions">
+                    <button id="downloadBtn">Download Result</button>
+                    <button id="newImageBtn">Process New Image</button>
+                </div>
+            </div>
         </div>
-
-        <div class="tool-card">
-            <h2>Image Compressor</h2>
-            <p>Compress images without losing quality.</p>
-            <button class="btn" onclick="goToSection('image-compressor')">Go to Tool</button>
-        </div>
-
-        <div class="tool-card">
-            <h2>Image Crop</h2>
-            <p>Crop images to the desired size and dimensions.</p>
-            <button class="btn" onclick="goToSection('image-crop')">Go to Tool</button>
-        </div>
-
-        <div class="tool-card">
-            <h2>Video Converter</h2>
-            <p>Convert videos to different formats quickly.</p>
-            <button class="btn" onclick="goToSection('video-converter')">Go to Tool</button>
-        </div>
-
-        <div class="tool-card">
-            <h2>Age Calculator</h2>
-            <p>Find your exact age in years, months, and days.</p>
-            <button class="btn" onclick="goToSection('age-calculator')">Go to Tool</button>
-        </div>
-
-        <div class="tool-card">
-            <h2>EMI Calculator</h2>
-            <p>Calculate your loan EMIs quickly.</p>
-            <button class="btn" onclick="goToSection('emi-calculator')">Go to Tool</button>
-        </div>
-
-        <div class="tool-card">
-            <h2>SIP Calculator</h2>
-            <p>Calculate your SIP returns effortlessly.</p>
-            <button class="btn" onclick="goToSection('sip-calculator')">Go to Tool</button>
-        </div>
-
-        <div class="tool-card">
-            <h2>Audio Trim</h2>
-            <p>Trim audio files to your required length.</p>
-            <button class="btn" onclick="goToSection('audio-trim')">Go to Tool</button>
-        </div>
-    </div>
-
-    <script>
-        function goToSection(sectionId) {
-            alert('Redirecting to ' + sectionId + ' (Page under development)');
-            // Replace with actual navigation logic when the pages are ready
-        }
-    </script>
+    </main>
+    
+    <footer>
+        <p>Created using TensorFlow.js | Free to use for personal projects</p>
+    </footer>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.11.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/body-pix@2.0.5"></script>
+    <script src="script.js"></script>
 </body>
 </html>
-
-  
